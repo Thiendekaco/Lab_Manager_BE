@@ -44,9 +44,6 @@ public class MemberRestController {
 
 
 
-
-    // add mapping for PUT /employees - update existing employee
-
     @PutMapping("/members/{memberId}")
     public Member updateEmployee(@PathVariable int memberId, @RequestBody Member theMemberUpdate) {
         System.out.println(memberId + " " + theMemberUpdate);
@@ -54,7 +51,6 @@ public class MemberRestController {
         return memberService.updateMemberById(theMemberUpdate, memberId);
     }
 
-    // add mapping for DELETE /employees/{employeeId} - delete employee
 
     @DeleteMapping("/member/{memberId}")
     public String deleteEmployee(@PathVariable int memberId) {
