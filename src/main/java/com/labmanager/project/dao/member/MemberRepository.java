@@ -3,9 +3,8 @@ package com.labmanager.project.dao.member;
 import com.labmanager.project.entity.member.Member;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface MemberDao {
+public interface MemberRepository {
 
     void save(Member member);
 

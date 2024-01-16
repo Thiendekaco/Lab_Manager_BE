@@ -1,22 +1,21 @@
 package com.labmanager.project.service.member;
 
-import com.labmanager.project.dao.member.MemberDao;
+import com.labmanager.project.dao.member.MemberRepository;
 import com.labmanager.project.entity.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
 public class MemberServiceImpl implements MemberService{
 
-    private MemberDao memberRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
-    public MemberServiceImpl(MemberDao memberRepository){
+    public MemberServiceImpl(MemberRepository memberRepository){
         this.memberRepository = memberRepository;
     }
 

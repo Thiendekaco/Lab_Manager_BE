@@ -3,20 +3,20 @@ package com.labmanager.project.dao.member;
 
 import com.labmanager.project.entity.member.Member;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public class MemberDaoImpl implements MemberDao {
+public class MemberRepositoryImpl implements MemberRepository {
     private EntityManager entityManager;
 
     @Autowired
-    public MemberDaoImpl (EntityManager theEntityManager ){
+    public MemberRepositoryImpl(EntityManager theEntityManager ){
         this.entityManager = theEntityManager;
     }
 
@@ -66,7 +66,12 @@ public class MemberDaoImpl implements MemberDao {
 
         query.setParameter("name", "%" + name + "%");
 
-        return query.getResultList();
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+
 
     }
 
@@ -74,7 +79,11 @@ public class MemberDaoImpl implements MemberDao {
     public List<Member> findAll() {
         TypedQuery<Member> query = entityManager.createQuery("FROM Member ", Member.class);
 
-        return query.getResultList();
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 

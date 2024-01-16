@@ -1,6 +1,7 @@
 package com.labmanager.project.entity.member;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.labmanager.project.entity.user.User;
 import jakarta.persistence.*;
 
@@ -31,6 +32,11 @@ public class Member {
     @Column( name = "age")
     private int age;
 
+    public Member(String name) {
+        this.name = name;
+    }
+
+    @JsonBackReference(value = "id_user")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;

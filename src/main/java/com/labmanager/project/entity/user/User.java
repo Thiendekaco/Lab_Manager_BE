@@ -1,6 +1,6 @@
 package com.labmanager.project.entity.user;
 
-
+import com.labmanager.project.entity.member.Member;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,10 +20,17 @@ public class User {
 
 
 
-    public User(String emailUser, int ageUser) {
-
-        this.emailUser = emailUser;
+    public Member getMember() {
+        return member;
     }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    @OneToOne( mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    Member member;
+
 
     public User(String emailUser) {
         this.emailUser = emailUser;
