@@ -1,6 +1,7 @@
 package com.labmanager.project.entity.user;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.labmanager.project.entity.member.Member;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,18 +19,19 @@ public class User {
     @Column( name = "email")
     private String emailUser;
 
+    @OneToOne( mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    Member member;
 
-
-    public User(String emailUser, int ageUser) {
-
-        this.emailUser = emailUser;
-    }
 
     public User(String emailUser) {
         this.emailUser = emailUser;
     }
 
     public User() {}
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     @Override
     public String toString() {
@@ -49,9 +51,6 @@ public class User {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
 }
 
 
