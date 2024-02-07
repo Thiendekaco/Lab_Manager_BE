@@ -17,14 +17,27 @@ public class User {
 
 
     @Column( name = "email")
-    private String emailUser;
+    private String email;
+
+    public User(String email, String password, Member member) {
+        this.email = email;
+        this.password = password;
+        this.member = member;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(name = "password")
+    private String password;
 
     @OneToOne( mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Member member;
 
 
-    public User(String emailUser) {
-        this.emailUser = emailUser;
+    public User(String email) {
+        this.email = email;
     }
 
     public User() {}
@@ -38,12 +51,12 @@ public class User {
         return "UserEntity{}";
     }
 
-    public String getEmailUser() {
-        return emailUser;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 

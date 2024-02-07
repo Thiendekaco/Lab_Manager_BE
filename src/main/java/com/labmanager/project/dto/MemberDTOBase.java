@@ -7,6 +7,16 @@ public class MemberDTOBase {
     private String university;
     private int age;
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    private String logo;
+
 
     public String getName() {
         return name;
@@ -31,11 +41,12 @@ public class MemberDTOBase {
         return university;
     }
 
-    public MemberDTOBase(String name, String email, String university, int age) {
+    public MemberDTOBase(String name, String email, String university, int age, String logo) {
         this.name = name;
         this.email = email;
         this.university = university;
         this.age = age;
+        this.logo = logo;
     }
 
     public void setUniversity(String university) {

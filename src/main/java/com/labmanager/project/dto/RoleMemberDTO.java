@@ -7,6 +7,8 @@ public class RoleMemberDTO {
 
     private String nameSchool;
 
+    private String logo;
+
     private List<String> field;
 
     private int ranking;
@@ -22,6 +24,14 @@ public class RoleMemberDTO {
 
     public String getNameSchool() {
         return nameSchool;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public void setNameSchool(String nameSchool) {
@@ -47,11 +57,12 @@ public class RoleMemberDTO {
     public RoleMemberDTO() {
     }
 
-    public RoleMemberDTO(String nameLab, String nameSchool, List<String> field, int ranking) {
+    public RoleMemberDTO(String nameLab, String nameSchool, List<String> field, int ranking, String logo) {
         this.nameLab = nameLab;
         this.nameSchool = nameSchool;
         this.field = field;
         this.ranking = ranking;
+        this.logo = logo;
     }
 
 

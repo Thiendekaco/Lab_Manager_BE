@@ -9,4 +9,6 @@ public interface UserService {
     public String deleteUserById(int theId) ;
 
     User findById(int theId);
+
+    User findByEmail (String email);
 }

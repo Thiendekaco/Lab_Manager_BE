@@ -4,6 +4,7 @@ package com.labmanager.project.entity.member;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.labmanager.project.entity.assets.Image;
 import com.labmanager.project.entity.user.User;
 import jakarta.persistence.*;
 
@@ -47,6 +48,17 @@ public class Member {
     @JoinColumn(name = "id_user")
     private User user;
 
+    public Image getLogo() {
+        return logo;
+    }
+
+    public void setLogo(Image logo) {
+        this.logo = logo;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "logo")
+    private Image logo;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
@@ -77,22 +89,15 @@ public class Member {
         return name;
     }
 
-    public Member(String name, String university, int age, User user) {
+
+    public Member(String name, String university, int age, User user, Image logo, List<RoleMember> roleMemberList) {
         this.name = name;
         this.university = university;
         this.age = age;
         this.user = user;
+        this.logo = logo;
+        this.roleMemberList = roleMemberList;
     }
-
-
-
-
-    public Member(String name, String university, int age) {
-        this.name = name;
-        this.university = university;
-        this.age = age;
-    }
-
 
     @Override
     public String toString() {
@@ -138,6 +143,7 @@ public class Member {
         this.name = memberUpdate.getName();
         this.university = memberUpdate.getUniversity();
         this.age = memberUpdate.getAge();
+        this.logo = memberUpdate.getLogo();
     }
 
 

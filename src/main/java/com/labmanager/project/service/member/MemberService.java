@@ -8,6 +8,8 @@ public interface MemberService {
 
     List<Member> findByName( String name );
 
+    Member findByEmail ( String email );
+
     Member findById(int theId);
 
     void save(Member theMember);

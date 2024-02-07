@@ -2,14 +2,10 @@ package com.labmanager.project.dto;
 
 import java.time.LocalDateTime;
 
-public class MemberLabDTO extends MemberDTOBase{
+public class LabMemberDTO extends MemberDTOBase{
 
     private LocalDateTime dateJoined;
     private String statusJoined;
-    private String role;
-
-    private RoleMemberDTO laboratory;
-
 
     public LocalDateTime getDateJoined() {
         return dateJoined;
@@ -35,26 +31,14 @@ public class MemberLabDTO extends MemberDTOBase{
         this.role = role;
     }
 
-    public RoleMemberDTO getLaboratory() {
-        return laboratory;
-    }
-
-    public MemberLabDTO(String name, String email, String university, int age, LocalDateTime dateJoined, String statusJoined, String role, RoleMemberDTO laboratory, String logo
-    ) {
+    public LabMemberDTO(String name, String email, String university, int age, String logo, LocalDateTime dateJoined, String statusJoined, String role) {
         super(name, email, university, age, logo);
         this.dateJoined = dateJoined;
         this.statusJoined = statusJoined;
         this.role = role;
-        this.laboratory = laboratory;
     }
 
-    public void setLaboratory(RoleMemberDTO laboratory) {
-        this.laboratory = laboratory;
-    }
-
-    public MemberLabDTO(){
-        super();
-    }
-
+    private String role;
 
 }
+

@@ -90,7 +90,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
     @Override
     public Member findByEmail(String email) {
-        TypedQuery<Member> result = entityManager.createQuery("SELECT u.member from User u where u.emailUser = :email", Member.class);
+        TypedQuery<Member> result = entityManager.createQuery("SELECT u.member from User u where u.email = :email", Member.class);
 
         result.setParameter("email", email);
 

@@ -19,8 +19,8 @@ public class MemberDTO extends MemberDTOBase {
         this.laboratories = laboratories;
     }
 
-    public MemberDTO(String name, String email, String university, int age, List<RoleMemberDTO> laboratories) {
-        super(name, email, university, age);
+    public MemberDTO(String name, String email, String university, int age, List<RoleMemberDTO> laboratories, String logo) {
+        super(name, email, university, age, logo);
         this.laboratories = laboratories;
     }
 

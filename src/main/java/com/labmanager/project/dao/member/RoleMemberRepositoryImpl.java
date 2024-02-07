@@ -69,7 +69,7 @@ public class RoleMemberRepositoryImpl implements RoleMemberRepository{
 
     @Override
     public RoleMember findMemberInLab(String email, String nameLab) {
-        TypedQuery<RoleMember> result = entityManager.createQuery("Select r from RoleMember r where member.user.emailUser = : emailMember " +
+        TypedQuery<RoleMember> result = entityManager.createQuery("Select r from RoleMember r where member.user.email = : emailMember " +
                 "and laboratoryDetail.laboratoryGeneral.nameLab =: nameLab ", RoleMember.class);
         result.setParameter("emailMember", email);
         result.setParameter("nameLab", nameLab);
@@ -99,7 +99,7 @@ public class RoleMemberRepositoryImpl implements RoleMemberRepository{
 
     @Override
     public List<RoleMember> findLabsListByMember(String emailUser) {
-        TypedQuery<RoleMember> result = entityManager.createQuery("Select r from RoleMember r where member.user.emailUser = : emailUser "
+        TypedQuery<RoleMember> result = entityManager.createQuery("Select r from RoleMember r where member.user.email = : emailUser "
                 , RoleMember.class);
         result.setParameter("emailUser", emailUser);
 

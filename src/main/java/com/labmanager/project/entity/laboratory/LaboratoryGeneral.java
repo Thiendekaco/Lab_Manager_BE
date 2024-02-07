@@ -1,6 +1,7 @@
 package com.labmanager.project.entity.laboratory;
 
 
+import com.labmanager.project.entity.assets.Image;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import jakarta.persistence.*;
@@ -31,11 +32,56 @@ public class LaboratoryGeneral {
     @Column(name = "ranking")
     private int ranking;
 
+    public LaboratoryGeneral(String nameLab, String nameSchool, List<String> field, int ranking, String location, String country, LaboratoryDetail laboratoryDetail, Image logo) {
+        this.nameLab = nameLab;
+        this.nameSchool = nameSchool;
+        this.field = field;
+        this.ranking = ranking;
+        this.location = location;
+        this.country = country;
+        this.laboratoryDetail = laboratoryDetail;
+        this.logo = logo;
+    }
+
+    @Column(name= "location")
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Column(name = "country")
+    private String country;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_lab_details")
     private LaboratoryDetail laboratoryDetail;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "logo")
+    private Image logo;
+
+    public LaboratoryGeneral(String nameLab, String nameSchool, List<String> field, int ranking, LaboratoryDetail laboratoryDetail, Image logo) {
+        this.nameLab = nameLab;
+        this.nameSchool = nameSchool;
+        this.field = field;
+        this.ranking = ranking;
+        this.laboratoryDetail = laboratoryDetail;
+        this.logo = logo;
+    }
 
     public LaboratoryDetail getLaboratoryDetail() {
         return laboratoryDetail;
@@ -45,13 +91,6 @@ public class LaboratoryGeneral {
         this.laboratoryDetail = laboratoryDetail;
     }
 
-
-    public LaboratoryGeneral(String nameLab, String nameSchool, List<String> field, int ranking) {
-        this.nameLab = nameLab;
-        this.nameSchool = nameSchool;
-        this.field = field;
-        this.ranking = ranking;
-    }
 
     @Override
     public String toString() {
@@ -113,12 +152,18 @@ public class LaboratoryGeneral {
         this.ranking = laboratoryGeneral.getRanking();
         this.nameSchool = laboratoryGeneral.getNameSchool();
         this.nameLab = laboratoryGeneral.getNameLab();
+        this.logo = laboratoryGeneral.getLogo();
         if(laboratoryGeneral.getLaboratoryDetail() != null){
             this.laboratoryDetail.setLaboratory(laboratoryGeneral.getLaboratoryDetail());
         }
         return this;
     }
 
+    public Image getLogo() {
+        return logo;
+    }
 
-
+    public void setLogo(Image logo) {
+        this.logo = logo;
+    }
 }

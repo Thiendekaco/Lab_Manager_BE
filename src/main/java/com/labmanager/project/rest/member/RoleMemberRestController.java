@@ -26,7 +26,7 @@ public class RoleMemberRestController {
         this.roleMemberService = roleMemberService;
     }
 
-    @GetMapping("/laboratories/{laboratory}/pending")
+    @GetMapping("/laboratories/{laboratory}/members/pending")
     public ResponseEntity<List<MemberLabDTO>> getMemberIsPending (@PathVariable String laboratory){
         List<RoleMember> roleMember = roleMemberService.findMemberIsPending(laboratory);
 
@@ -80,6 +80,11 @@ public class RoleMemberRestController {
 
     }
 
+    @DeleteMapping("/members")
+    public void deleteMemberInLab ( @RequestParam("email") String email, @RequestParam("laboratory") String nameLab){
+        roleMemberService.DeleteMemberJoined(email, nameLab);
+    }
+
 
     private MemberLabDTO ConvertEntityToDTO (RoleMember roleMember) {
 
@@ -90,18 +95,20 @@ public class RoleMemberRestController {
                 laboratoryGeneral.getNameLab(),
                 laboratoryGeneral.getNameSchool(),
                 laboratoryGeneral.getField(),
-                laboratoryGeneral.getRanking()
+                laboratoryGeneral.getRanking(),
+                "http://localhost:8080/api/image/" + laboratoryGeneral.getLogo().getId()
         );
 
         return new MemberLabDTO(
                 member.getName(),
-                member.getUser().getEmailUser(),
+                member.getUser().getEmail(),
                 member.getUniversity(),
                 member.getAge(),
                 roleMember.getTimeJoined(),
                 roleMember.getStatusJoined(),
                 roleMember.getRole(),
-                roleMemberDTO
+                roleMemberDTO,
+                "http://localhost:8080/api/image/" + member.getLogo().getId()
         );
     }
 
@@ -112,7 +119,8 @@ public class RoleMemberRestController {
                 laboratoryGeneral.getNameLab(),
                 laboratoryGeneral.getNameSchool(),
                 laboratoryGeneral.getField(),
-                laboratoryGeneral.getRanking()
+                laboratoryGeneral.getRanking(),
+                "http://localhost:8080/api/image/" + laboratoryGeneral.getLogo().getId()
         );
     };
 
@@ -123,23 +131,25 @@ public class RoleMemberRestController {
 
     static MemberDTO getMemberDTO(Member member, RoleMemberService roleMemberService) {
         List<RoleMemberDTO> roleMemberDTOList = new ArrayList<RoleMemberDTO>();
-        roleMemberService.findLabIsSuccess(member.getUser().getEmailUser()).forEach(lab -> {
+        roleMemberService.findLabIsSuccess(member.getUser().getEmail()).forEach(lab -> {
             LaboratoryGeneral laboratoryGeneral = lab.getLaboratoryGeneral();
 
             roleMemberDTOList.add(new RoleMemberDTO(
                     laboratoryGeneral.getNameLab(),
                     laboratoryGeneral.getNameSchool(),
                     laboratoryGeneral.getField(),
-                    laboratoryGeneral.getRanking()
+                    laboratoryGeneral.getRanking(),
+                    "http://localhost:8080/api/image/" + laboratoryGeneral.getLogo().getId()
             ));
         });
 
         return new MemberDTO(
                 member.getName(),
-                member.getUser().getEmailUser(),
+                member.getUser().getEmail(),
                 member.getUniversity(),
                 member.getAge(),
-                roleMemberDTOList
+                roleMemberDTOList,
+                "http://localhost:8080/api/image/" + member.getLogo().getId()
         );
     }
 

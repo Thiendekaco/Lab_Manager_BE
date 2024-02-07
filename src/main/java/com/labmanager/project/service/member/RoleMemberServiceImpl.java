@@ -42,7 +42,6 @@ public class RoleMemberServiceImpl implements RoleMemberService {
 
         if(roleMemberCheck == null && member != null && laboratoryDetail != null){
             roleMemberRepo.save(new RoleMember(member, laboratoryDetail, role));
-            System.out.println("1231231");
             return roleMemberRepo.findMemberInLab
                     (emailUser, nameLab);
         }

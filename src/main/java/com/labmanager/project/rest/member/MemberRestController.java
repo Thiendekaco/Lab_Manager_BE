@@ -53,9 +53,20 @@ public class MemberRestController {
         return ResponseEntity.ok(ConvertEntityToDTO(member));
     }
 
+
+
     @GetMapping("/members/profile")
-    public ResponseEntity<List<MemberDTO>> getMemberByName(@RequestParam("name") String nameMember){
-        List<Member> memberList = memberService.findByName(nameMember);
+    public ResponseEntity<List<MemberDTO>> getMemberByName(
+            @RequestParam(required = false, name = "name") String nameMember,
+            @RequestParam(required = false, name = "email") String emailMember
+    ){
+
+        List<Member> memberList = new ArrayList<Member>();
+        if(nameMember != null){
+            memberList = memberService.findByName(nameMember);
+        }else{
+            memberList.add(memberService.findByEmail(emailMember));
+        }
 
         if(memberList == null){
             throw new RuntimeException("Employee id not found - " + nameMember);
@@ -75,7 +86,7 @@ public class MemberRestController {
 
 
 
-    @PutMapping("/members/{memberId}")
+    @PutMapping ("/members/{memberId}")
     public ResponseEntity<MemberDTO> updateEmployee(@PathVariable int memberId, @RequestBody Member theMemberUpdate) {
         System.out.println(memberId + " " + theMemberUpdate);
 
@@ -99,6 +110,11 @@ public class MemberRestController {
         memberService.deleteById(memberId);
 
         return "Deleted employee id - " + memberId;
+    }
+
+    private MemberDTO convertEntityToDTO (Member member) {
+
+        return getMemberDTO(member, roleMemberService);
     }
 
     private MemberDTO ConvertEntityToDTO (Member member) {

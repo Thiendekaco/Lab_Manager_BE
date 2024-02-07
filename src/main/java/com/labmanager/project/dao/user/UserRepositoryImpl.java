@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     @Transactional
     public void save(User user) {
-        User checkUser = this.findUserByEmail(user.getEmailUser());
+        User checkUser = this.findUserByEmail(user.getEmail());
 
         if (checkUser == null){
             this.entityManager.persist(user);
@@ -52,7 +52,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findUserByEmail(String email) {
-        TypedQuery<User> result = entityManager.createQuery("SELECT u from User u where u.emailUser = :email", User.class);
+        TypedQuery<User> result = entityManager.createQuery("SELECT u from User u where u.email = :email", User.class);
 
         result.setParameter("email", email);
 
