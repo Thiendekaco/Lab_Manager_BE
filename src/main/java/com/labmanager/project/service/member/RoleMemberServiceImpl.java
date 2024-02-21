@@ -64,12 +64,12 @@ public class RoleMemberServiceImpl implements RoleMemberService {
         List<RoleMember> roleMemberList = roleMemberRepo.findMemberListByLab(nameLab);
 
         if(roleMemberList != null){
+
             return roleMemberList
                     .stream()
                     .filter(roleMember -> Objects.equals(roleMember.getStatusJoined(), "pending"))
                     .toList();
         }
-
 
         return new ArrayList<RoleMember>(0);
     }
